@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue响应式</title>
+    <script src="../../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">{{bar}}==={{foo}} </div>
+    <script>
+        // 1. nextTick 用于vue异步批量更新
+        // 2. 用户提交的nextTick和vue实现批量更新的队列为同一个
+        // 3. 修改状态就会向队列加入watcher
+        const app = new Vue({
+            el: "#app",
+            data: {
+                bar: 123,foo:"foo"
+            },
+            mounted() {
+             setTimeout(()=>{
+                Promise.resolve().then(res=>{
+                    console.log("2")
+                })
+                const dom = document.querySelector("#app");
+                this.bar = 321;
+                console.log("1", dom.innerHTML)
+                Promise.resolve().then(res=>{
+                    console.log("4")
+                })
+                this.$nextTick(() => {
+                    alert("stop")
+                    console.log("3", dom.innerHTML);
+                })
+                this.bar = 456;
+             },1000)
+                
+            }
+        })
+    </script>
+</body>
+
+</html>
