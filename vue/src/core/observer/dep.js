@@ -21,19 +21,19 @@ export default class Dep {
   }
 
   addSub (sub: Watcher) {
-    this.subs.push(sub)
+    this.subs.push(sub)  // 收集watcher实例
   }
 
   removeSub (sub: Watcher) {
-    remove(this.subs, sub)
+    remove(this.subs, sub) 
   }
 
   depend () {
     if (Dep.target) {
-      Dep.target.addDep(this)
+      Dep.target.addDep(this)  // 收集Dep实例
     }
   }
-
+  // 通知更新
   notify () {
     // stabilize the subscriber list first
     const subs = this.subs.slice()

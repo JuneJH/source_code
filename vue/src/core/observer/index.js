@@ -40,10 +40,11 @@ export class Observer {
   vmCount: number; // number of vms that have this object as root $data
 
   constructor (value: any) {
-    this.value = value
-    this.dep = new Dep()
+    this.value = value // 保存该对象
+    this.dep = new Dep() // 创建一个与之相对应的Dep用于收集Key对应Watcher
     this.vmCount = 0
-    def(value, '__ob__', this)
+    def(value, '__ob__', this) // 为该对象添加__ob__属性
+    // 如果是数组则覆盖原型
     if (Array.isArray(value)) {
       if (hasProto) {
         protoAugment(value, arrayMethods)
@@ -139,7 +140,7 @@ export function defineReactive (
   customSetter?: ?Function,
   shallow?: boolean
 ) {
-  const dep = new Dep()
+  const dep = new Dep() // key 对应的每一个专属Dep
 
   const property = Object.getOwnPropertyDescriptor(obj, key)
   if (property && property.configurable === false) {
@@ -160,9 +161,9 @@ export function defineReactive (
     get: function reactiveGetter () {
       const value = getter ? getter.call(obj) : val
       if (Dep.target) {
-        dep.depend()
+        dep.depend()  // 该key值专属Dep收集依赖
         if (childOb) {
-          childOb.dep.depend()
+          childOb.dep.depend() // 对象专属Dep收集依赖
           if (Array.isArray(value)) {
             dependArray(value)
           }

@@ -8,6 +8,8 @@
 
 2. 调用vue vue/src/platforms/web/runtime/index.js
 
+- 实现mount方法
+
 - 处理全局配置
 
 3. vue/src/core/index.js

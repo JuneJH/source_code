@@ -6,7 +6,7 @@
 import { def } from '../util/index'
 
 const arrayProto = Array.prototype
-export const arrayMethods = Object.create(arrayProto)
+export const arrayMethods = Object.create(arrayProto) // 创建重写数组原型对象 以Array的原型为该对象的原型
 
 const methodsToPatch = [
   'push',
