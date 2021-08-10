@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue extend</title>
+    <script src="../../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app"> </div>
+    <script>
+        const vueExtend = Vue.extend({data(){return {foo:"bar"}}})
+        const vueExtend2 = vueExtend.extend({props:["needData"],render(h){return h("div",this.needData === undefined)}});
+        const v = new vueExtend2();
+        const v1 = vueExtend.extend({components:{v}})
+        const v1App = new v1({el:"#app",template:"<div>使用组件v：<v :needData='345'/></div>"})
+
+    
+    </script>
+</body>
+
+</html>
