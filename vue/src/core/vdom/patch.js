@@ -713,9 +713,10 @@ export function createPatchFunction (backend) {
     } else {
       const isRealElement = isDef(oldVnode.nodeType)
       if (!isRealElement && sameVnode(oldVnode, vnode)) {
-        // patch existing root node
+        // 更新时,需要diff算法计算需要更新的位置
         patchVnode(oldVnode, vnode, insertedVnodeQueue, null, null, removeOnly)
       } else {
+        // 初始化挂载
         if (isRealElement) {
           // mounting to a real element
           // check if this is server-rendered content and if we can perform
