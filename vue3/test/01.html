@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>hello {{data.version}}</h1>
+    </div>
+    <script src="../packages/vue/dist/vue.global.js"></script>
+    <script>
+        const {createApp,reactive,computed} = Vue;
+        const instance = createApp({
+            el:"#app",
+            setup(){
+                const data = reactive({
+                    version:"vue3"
+                })
+                const versionRef = computed(()=>"V3-"+data.version)
+                return {
+                    data,
+                    versionRef
+                }
+            }
+        })
+        const comp = instance.mount("#app")
+    </script>
+</body>
+</html>
