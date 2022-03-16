@@ -1,5 +1,5 @@
 const arr = [1,2,3,4,5];
-const target = 3;
+const target = 0;
 
 
 function fn(arr,target){
@@ -22,7 +22,9 @@ function fn(arr,target){
             middle = Math.ceil((right + left) / 2);
         }
     }
-    if(right === left){
+    if(right > left){
+        return right + 1;
+    }else{
         return left;
     }
 }
